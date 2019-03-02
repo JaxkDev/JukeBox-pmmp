@@ -1,0 +1,10 @@
+---
+name: JukeBox
+main: Jackthehack21\JukeBox\Spawn
+version: 1.0.0
+api: 3.0.0
+load: STARTUP
+authors:
+- Jackthehack21
+description: Adds the Jukebox and discs to pmmp !
+...
