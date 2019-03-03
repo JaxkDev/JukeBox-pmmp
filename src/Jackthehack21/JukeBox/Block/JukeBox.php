@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Jackthehack21\JukeBox\Block;
 
-use pocketmine\block\Block;
+use pocketmine\block\Solid;
 use pocketmine\block\BlockToolType;
 
-class JukeBox extends Block{
+class JukeBox extends Solid{
 
 	//public record_inside = false;
 
@@ -21,7 +21,7 @@ class JukeBox extends Block{
     }
 
     public function getHardness() : float{
-		return 1;
+		return 2.0;
 	}
 
 	public function getToolType() : int{
