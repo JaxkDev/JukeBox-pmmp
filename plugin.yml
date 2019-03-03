@@ -1,6 +1,6 @@
 ---
 name: JukeBox
-main: Jackthehack21\JukeBox\Spawn
+main: Jackthehack21\JukeBox\Main
 version: 1.0.0
 api: 3.0.0
 load: STARTUP
