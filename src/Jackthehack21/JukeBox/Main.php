@@ -16,7 +16,7 @@ class Main extends PluginBase implements Listener
     {
         self::$instance = $this;
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !);
+        $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !");
 
         registerThings();
     }
