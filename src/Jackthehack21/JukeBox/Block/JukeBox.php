@@ -11,6 +11,11 @@ class JukeBox extends Block{
 
 	//public record_inside = false;
 
+    public function __construct(int $id,string $name = null,)
+    {
+        parent::__construct($id, 0, $name, null);
+    }
+
     public function getFlammability() : int{
         return 2;
     }

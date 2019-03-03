@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener
     }
 
     public function registerThings(){
-        BlockFactory::registerBlock(new JukeBox(84, name="JukeBox"));
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"));
     }
 
 }
