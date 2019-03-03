@@ -12,13 +12,15 @@ class Main extends PluginBase implements Listener
 
     private static $instance = null;
 
+    public function onLoad(){
+        $this->registerThings();
+    }
+
     public function onEnable()
     {
         self::$instance = $this;
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !");
-
-        $this->registerThings();
     }
 
     public static function getInstance()
@@ -27,7 +29,7 @@ class Main extends PluginBase implements Listener
     }
 
     public function registerThings(){
-        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"));
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"), true);
     }
 
 }
