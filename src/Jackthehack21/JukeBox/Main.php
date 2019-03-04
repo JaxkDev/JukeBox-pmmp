@@ -2,10 +2,14 @@
 
 namespace Jackthehack21\JukeBox;
 
+use pocketmine\item\Item;
 use pocketmine\event\Listener;
+use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\block\BlockFactory;
+
 use Jackthehack21\JukeBox\Block\JukeBox;
+use Jackthehack21\JukeBox\Item\Record;
 
 class Main extends PluginBase implements Listener
 {
@@ -13,7 +17,7 @@ class Main extends PluginBase implements Listener
     private static $instance = null;
 
     public function onLoad(){
-        $this->registerThings();
+        $this->registerEverything();
     }
 
     public function onEnable()
@@ -28,8 +32,15 @@ class Main extends PluginBase implements Listener
         return self::$instance;
     }
 
-    public function registerThings(){
-        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"), true);
+    private function registerEverything(){
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"));
+        //todo two blocks one for record in, one for out
+
+        //Records here:
+        ItemFactory::registerItem(new Record(500, "Music-Disc 13"));
+
+        //Add to creative menu:
+        Item::initCreativeItems();
     }
 
 }
