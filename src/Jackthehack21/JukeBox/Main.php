@@ -7,9 +7,10 @@ use pocketmine\event\Listener;
 use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\block\BlockFactory;
+use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 
-use Jackthehack21\JukeBox\Block\JukeBox;
 use Jackthehack21\JukeBox\Item\Record;
+use Jackthehack21\JukeBox\Block\JukeBox;
 
 class Main extends PluginBase implements Listener
 {
@@ -33,11 +34,11 @@ class Main extends PluginBase implements Listener
     }
 
     private function registerEverything(){
-        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"));
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"), true); //true to fix /reload
         //todo two blocks one for record in, one for out
 
         //Records here:
-        ItemFactory::registerItem(new Record(500, "Music-Disc 13"));
+        ItemFactory::registerItem(new Record(500, "13", LevelSoundEventPacket::SOUND_RECORD_13), true);
 
         //Add to creative menu:
         Item::initCreativeItems();
