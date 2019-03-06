@@ -15,27 +15,19 @@ use Jackthehack21\JukeBox\Block\JukeBox;
 class Main extends PluginBase implements Listener
 {
 
-    private static $instance = null;
-
     public function onLoad(){
         $this->registerEverything();
     }
 
     public function onEnable()
     {
-        self::$instance = $this;
+        // save/get config
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !");
     }
 
-    public static function getInstance()
-    {
-        return self::$instance;
-    }
-
     private function registerEverything(){
-        BlockFactory::registerBlock(new JukeBox(84, "JukeBox"), true); //true to fix /reload
-        //todo two blocks one for record in, one for out
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox", $this), true); //true to fix /reload
 
         //Records here:
         ItemFactory::registerItem(new Record(500, "13", LevelSoundEventPacket::SOUND_RECORD_13), true);
@@ -53,6 +45,10 @@ class Main extends PluginBase implements Listener
 
         //Add to creative menu:
         Item::initCreativeItems();
+    }
+
+    public function debug(string $msg){
+        $this->getLogger()->info("[DEBUG] : ".$msg);
     }
 
 }

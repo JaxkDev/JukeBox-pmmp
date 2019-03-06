@@ -4,7 +4,6 @@ main: Jackthehack21\JukeBox\Main
 version: 1.0.0
 api: 3.0.0
 load: STARTUP
-authors:
-- Jackthehack21
-description: Adds the Jukebox and discs to pmmp !
+author: Jackthehack21
+description: Adds the Jukebox and Records to pmmp !
 ...
