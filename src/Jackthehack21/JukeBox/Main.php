@@ -3,6 +3,7 @@
 namespace Jackthehack21\JukeBox;
 
 use pocketmine\item\Item;
+use pocketmine\utils\Config;
 use pocketmine\event\Listener;
 use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
@@ -17,13 +18,18 @@ class Main extends PluginBase implements Listener
 
     public function onLoad(){
         $this->registerEverything();
+        $this->registerConfig();
     }
 
     public function onEnable()
     {
-        // save/get config
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !");
+    }
+
+    private function registerConfig(){
+        $this->saveResource("config.yml");
+        $this->cfg = new Config($this->getDataFolder()."config.yml", Config::YAML, []);
     }
 
     private function registerEverything(){
@@ -48,7 +54,9 @@ class Main extends PluginBase implements Listener
     }
 
     public function debug(string $msg){
-        $this->getLogger()->info("[DEBUG] : ".$msg);
+        if($this->cfg->get('debug')){
+            $this->getLogger()->info("[DEBUG] : ".$msg);
+        }
     }
 
 }
