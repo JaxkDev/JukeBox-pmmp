@@ -7,9 +7,11 @@ use pocketmine\item\Item;
 class Record extends Item {
 
     private $soundId;
+    private $soundName;
 
 	public function __construct(int $id, string $Uname, int $soundId){
-        parent::__construct($id, 0, "Music-Disk ".$Uname);
+        parent::__construct($id, 0, "Record: ".$Uname);
+        $this->soundName = $Uname;
         $this->soundId = $soundId;
     }
     
@@ -21,7 +23,11 @@ class Record extends Item {
         return $this->getId();
     }
 
-    public function getSoundId(): int{
+    public function getSoundName(){
+        return $this->soundName;
+    }
+
+    public function getSoundId(){
         return $this->soundId;
     }
 

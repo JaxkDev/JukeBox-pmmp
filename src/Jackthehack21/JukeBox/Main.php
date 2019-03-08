@@ -3,6 +3,7 @@
 namespace Jackthehack21\JukeBox;
 
 use pocketmine\item\Item;
+use pocketmine\tile\Tile;
 use pocketmine\utils\Config;
 use pocketmine\event\Listener;
 use pocketmine\item\ItemFactory;
@@ -10,6 +11,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\block\BlockFactory;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 
+use Jackthehack21\JukeBox\Tile\JBTile;
 use Jackthehack21\JukeBox\Item\Record;
 use Jackthehack21\JukeBox\Block\JukeBox;
 
@@ -47,7 +49,9 @@ class Main extends PluginBase implements Listener
 		ItemFactory::registerItem(new Record(508, "Strad", LevelSoundEventPacket::SOUND_RECORD_STRAD), true);
 		ItemFactory::registerItem(new Record(509, "Ward", LevelSoundEventPacket::SOUND_RECORD_WARD), true);
 		ItemFactory::registerItem(new Record(510, "11", LevelSoundEventPacket::SOUND_RECORD_11), true);
-		ItemFactory::registerItem(new Record(511, "Wait", LevelSoundEventPacket::SOUND_RECORD_WAIT), true);
+        ItemFactory::registerItem(new Record(511, "Wait", LevelSoundEventPacket::SOUND_RECORD_WAIT), true);
+        
+        Tile::registerTile(JBTile::class, ["Jukebox"]);
 
         //Add to creative menu:
         Item::initCreativeItems();

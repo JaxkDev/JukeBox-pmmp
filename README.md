@@ -23,7 +23,7 @@ _Thanks to the below for helping me testing in private, your help was massively 
 - [x] Popup "Now Playing X"
 - [ ] Even more config options
 - [ ] Custom record names (so resource packs can modify the sound)
-- [ ] Save and Read state (when server restarts records remain in jukebox)
+- [x] Save and Read state (when server restarts records remain in jukebox)
 
 ## Notice:
 ___This is a freelance project and will not be constantly worked on, i do accept PR's and Feature requests though.___
