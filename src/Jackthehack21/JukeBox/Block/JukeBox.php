@@ -19,7 +19,7 @@ class JukeBox extends Solid{
     public $record_inside = false;
     public $record = null; //null or Record
 
-    private $plugin;
+    private $plugin; //todo remove
 
     public function __construct(int $id,string $name = null, Main $plugin)
     {
@@ -47,6 +47,7 @@ class JukeBox extends Solid{
         $this->debug("Activated");
         //Play / Stop sound.
         if(!$player instanceof Player){
+			$this->debug("Not activated by Player.");
             return false;
         }
         if($this->record_inside){
@@ -55,8 +56,11 @@ class JukeBox extends Solid{
             if($item instanceof Record){
                 $this->addRecord($item, $player);
                 $player->getInventory()->removeItem($item);
-            }
+            } else {
+				$this->debug("Not activated by Record.");
+			}
         }
+		$this->level->setBlock($this, $this); //Part 1 or testing.
         return true;
     }
     
@@ -84,10 +88,12 @@ class JukeBox extends Solid{
 
     public function playSound(int $id, Player $player) : void{
         $this->debug("Playing sound: ".$id);
+		
         $this->getLevel()->broadcastLevelSoundEvent($this, $id);
+		
         $pk = new TextPacket();
 		$pk->type = TextPacket::TYPE_JUKEBOX_POPUP;
-        $pk->message = "Music Now Playing.";
+        $pk->message = "Now Playing: X";
 		$player->dataPacket($pk);
     }
 
