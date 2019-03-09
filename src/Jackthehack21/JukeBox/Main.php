@@ -5,7 +5,6 @@ namespace Jackthehack21\JukeBox;
 use pocketmine\item\Item;
 use pocketmine\tile\Tile;
 use pocketmine\utils\Config;
-use pocketmine\event\Listener;
 use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\block\BlockFactory;
@@ -15,18 +14,18 @@ use Jackthehack21\JukeBox\Tile\JBTile;
 use Jackthehack21\JukeBox\Item\Record;
 use Jackthehack21\JukeBox\Block\JukeBox;
 
-class Main extends PluginBase implements Listener
+class Main extends PluginBase
 {
 
     public function onLoad(){
         $this->registerEverything();
         $this->registerConfig();
     }
-
-    public function onEnable()
+	
+	public function onEnable()
     {
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("JukeBox by Jackthehack21, Enabled !");
+        $this->getLogger()->info($this->cfg->get("debug") === false ? "JukeBox by Jackthehack21, Enabled !" : "JukeBox by Jackthehack21, Enabled + Debug !");
+		$this->getLogger()->info("[REMINDER] : JukeBox will not be heard on mobile devices if they do not have the 'music' DLC free from the mcpe store."); //If anyone makes a issue about this problem again :(
     }
 
     private function registerConfig(){
