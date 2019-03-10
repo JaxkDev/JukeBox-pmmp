@@ -14,6 +14,8 @@ _Thanks to the below for helping me testing in private, your help was massively 
 - Kevin ([@kevinishawesome](https://github.com/kevinishawesome))
 - DragonBlitz ([@DragonBlitz10](https://github.com/Dragonblitz10))
 
+- minecraft.gamepedia.com (For JukeBox icon)
+
 ## Todo:
 
 - [x] JukeBox block
