@@ -2,4 +2,10 @@
 
 debug: false
 
+particles: true
+particles_ticks: 30
+
+popup: true
+popup_text: "Now Playing: C418 - {NAME}"
+
 ...

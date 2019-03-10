@@ -4,12 +4,19 @@ namespace Jackthehack21\JukeBox\Tile;
 
 use Jackthehack21\JukeBox\Item\Record;
 
-use pocketmine\player;
+use pocketmine\Server;
+use pocketmine\Player;
 use pocketmine\item\Item;
 use pocketmine\tile\Spawnable;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\level\particle\GenericParticle;
 use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
+
+use Jackthehack21\JukeBox\Main;
+
+use mt_rand;
+use mt_getrandmax;
 
 class JBTile extends Spawnable{
 
@@ -29,7 +36,8 @@ class JBTile extends Spawnable{
                 $this->updateRecord($item, $player);
                 $player->getInventory()->removeItem($item);
             }
-        }
+		}
+		$this->scheduleUpdate();
 	}
 
 	public function handleBreak(Item $item, Player $player){
@@ -49,11 +57,15 @@ class JBTile extends Spawnable{
 			$this->has_record = true;
 
 			$this->getLevel()->broadcastLevelSoundEvent($this, $record->getSoundId());
-		
-			$pk = new TextPacket();
-			$pk->type = TextPacket::TYPE_JUKEBOX_POPUP;
-			$pk->message = "Now Playing: C418 - ".$record->getSoundName();
-			$player->dataPacket($pk);
+
+			$plug = Main::getInstance();
+			if($plug->cfg->get("popup") === true){
+				$msg = str_replace("{NAME}",$record->getSoundName(),$plug->cfg->get("popup_text"));
+				$pk = new TextPacket();
+				$pk->type = TextPacket::TYPE_JUKEBOX_POPUP;
+				$pk->message = $msg;
+				$player->dataPacket($pk);
+			}
 		}
 		$this->onChanged();
 	}
@@ -71,7 +83,19 @@ class JBTile extends Spawnable{
 	public function stopSound() : void{
         $this->getBlock()->debug("Stopping sound.");
         $this->getLevel()->broadcastLevelSoundEvent($this, LevelSoundEventPacket::SOUND_STOP_RECORD);
-    }
+	}
+	
+	public function onUpdate() : bool{
+		//$this->getBlock()->debug("Update");
+		$plug = Main::getInstance();
+		if($this->has_record && $plug->cfg->get("particles") === true){
+			if(Server::getInstance()->getTick() % $plug->cfg->get("particles_ticks") == 0 ){ //todo configurable
+				//$this->getBlock()->debug("Adding particle"); even for debug thats quite a bit :)
+				$this->level->addParticle(new GenericParticle($this->add($this->randomFloat(0.3,0.7), $this->randomFloat(1.2,1.6), $this->randomFloat(0.3,0.7)), 36));
+			}
+		}
+		return true;
+	}
 
 	////// BELOW IS STATE SAVING DONT TOUCH ///////
 
@@ -86,5 +110,9 @@ class JBTile extends Spawnable{
 		}
 	}
 	protected function addAdditionalSpawnData(CompoundTag $nbt) : void{} //must stay
+
+	private function randomFloat($min = 0, $max = 1) {
+		return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+	}
 
 }
