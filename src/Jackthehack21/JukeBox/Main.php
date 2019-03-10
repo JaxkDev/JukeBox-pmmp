@@ -17,15 +17,18 @@ use Jackthehack21\JukeBox\Block\JukeBox;
 class Main extends PluginBase
 {
 
+    private static $instance = null;
+
     public function onLoad(){
-        $this->registerEverything();
+        $this->registerItems();
         $this->registerConfig();
     }
-	
-	public function onEnable()
+
+    public function onEnable()
     {
+        self::$instance = $this;
         $this->getLogger()->info($this->cfg->get("debug") === false ? "JukeBox by Jackthehack21, Enabled !" : "JukeBox by Jackthehack21, Enabled + Debug !");
-		$this->getLogger()->info("[REMINDER] : JukeBox will not be heard on mobile devices if they do not have the 'music' DLC free from the mcpe store."); //If anyone makes a issue about this problem again :(
+        $this->getLogger()->info("[REMINDER] : JukeBox will not be heard on mobile devices if they do not have the 'music' DLC free from the mcpe store."); //If anyone makes a issue about this problem again :(
     }
 
     private function registerConfig(){
@@ -33,7 +36,7 @@ class Main extends PluginBase
         $this->cfg = new Config($this->getDataFolder()."config.yml", Config::YAML, []);
     }
 
-    private function registerEverything(){
+    private function registerItems(){
         BlockFactory::registerBlock(new JukeBox(84, "JukeBox", $this), true); //true to fix /reload
 
         //Records here:
@@ -54,6 +57,11 @@ class Main extends PluginBase
 
         //Add to creative menu:
         Item::initCreativeItems();
+    }
+
+    public static function getInstance()
+    {
+        return self::$instance;
     }
 
     public function debug(string $msg){

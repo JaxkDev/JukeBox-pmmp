@@ -1,3 +1,5 @@
+[![HitCount](http://hits.dwyl.io/Jackthehack21/JukeBox-pmmp.svg)]
+
 # JukeBox-pmmp
 
 A small plugin that implements the Jukebox and Records untill its in the core of pmmp !
@@ -11,9 +13,6 @@ _Thanks to the below for helping me testing in private, your help was massively 
 
 - Kevin ([@kevinishawesome](https://github.com/kevinishawesome))
 - DragonBlitz ([@DragonBlitz10](https://github.com/Dragonblitz10))
-
-## Known Issues:
-- State being lost when server closed
 
 ## Todo:
 

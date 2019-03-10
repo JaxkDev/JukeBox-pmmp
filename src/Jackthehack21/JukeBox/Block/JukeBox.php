@@ -18,7 +18,7 @@ use Jackthehack21\JukeBox\Main;
 
 class JukeBox extends Solid{
 
-    private $plugin; //todo remove
+    private $plugin;
 
     public function __construct(int $id,string $name = null, Main $plugin)
     {
@@ -45,8 +45,8 @@ class JukeBox extends Solid{
 	public function place(Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, Player $player = null) : bool{
 		$this->getLevel()->setBlock($this, $this, true, true);
 		$this->debug("New Jukebox placed, Tile Created");
-		Tile::createTile("Jukebox", $this->getLevel(), JBTile::createNBT($this, $face, $item, $player));
-		return true;
+        Tile::createTile("Jukebox", $this->getLevel(), JBTile::createNBT($this, $face, $item, $player));
+        return true;
 	}
 
     public function onActivate(Item $item, Player $player = null) : bool{
