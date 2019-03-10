@@ -20,8 +20,7 @@ _Thanks to the below for helping me testing in private, your help was massively 
 - [x] Record Items
 - [x] Sound playing
 - [x] Popup "Now Playing X"
-- [ ] Even more config options
-- [ ] Custom record names (so resource packs can modify the sound)
+- [X] Even more config options
 - [x] Save and Read state (when server restarts records remain in jukebox)
 
 ## Notice:
