@@ -27,8 +27,6 @@ class Main extends PluginBase
     public function onEnable()
     {
         self::$instance = $this;
-        $this->getLogger()->info($this->cfg->get("debug") === false ? "JukeBox by Jackthehack21, Enabled !" : "JukeBox by Jackthehack21, Enabled + Debug !");
-        $this->getLogger()->notice("JukeBox will not be heard on mobile devices if they do not have the 'music' DLC free from the mcpe store."); //If anyone makes a issue about this problem again :(
     }
 
     private function registerConfig(){
