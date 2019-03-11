@@ -41,11 +41,25 @@ class JukeBox extends Solid{
 	public function getToolType() : int{
 		return BlockToolType::TYPE_AXE;
     }
+	
+	public function verifyTile() : int{
+		if($this->getLevel()->getTile($this) === null){
+			Tile::createTile("Jukebox", $this->getLevel(), JBTile::createNBT($this, $face, $item, $player));
+			$this->debug("Tile not found, created new tile.");
+			return 1;
+		}
+		$this->debug("Tile Verified");
+		return 0;
+	}
 
 	public function place(Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, Player $player = null) : bool{
 		$this->getLevel()->setBlock($this, $this, true, true);
-		$this->debug("New Jukebox placed, Tile Created");
-        Tile::createTile("Jukebox", $this->getLevel(), JBTile::createNBT($this, $face, $item, $player));
+		$this->debug("New Jukebox placed, Creating Tile.");
+        //Tile::createTile("Jukebox", $this->getLevel(), JBTile::createNBT($this, $face, $item, $player));
+		$this->verifyTile();
+		if($this->getLevel()->getTile($this) === null){
+			$this->getLogger()->error("Failed to create tile.");
+		}
         return true;
 	}
 
@@ -55,6 +69,7 @@ class JukeBox extends Solid{
 			$this->debug("Not activated by Player.");
             return false;
         }
+		$this->verifyTile();
         $JBTile = $this->getLevel()->getTile($this);
         $JBTile->handleInteract($item, $player);
         return true;
@@ -62,6 +77,7 @@ class JukeBox extends Solid{
     
     public function onBreak(Item $item, Player $player = null) : bool{
         $this->debug("Broke JukeBox");
+		$this->verifyTile();
         $JBTile = $this->getLevel()->getTile($this);
         $JBTile->handleBreak($item, $player);
         return parent::onBreak($item, $player);
