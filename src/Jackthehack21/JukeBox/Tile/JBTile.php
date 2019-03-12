@@ -1,5 +1,23 @@
 <?php
 
+/*
+*   JukeBox Pocketmine Plugin
+*   Copyright (C) 2019 Jackthehack21 (Jack Honour)
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 namespace Jackthehack21\JukeBox\Tile;
 
 use Jackthehack21\JukeBox\Item\Record;
@@ -14,6 +32,8 @@ use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 
 use Jackthehack21\JukeBox\Main;
+use Jackthehack21\JukeBox\Event\RecordPlayingEvent;
+use Jackthehack21\JukeBox\Event\RecordStopEvent;
 
 use mt_rand;
 use mt_getrandmax;
@@ -43,16 +63,42 @@ class JBTile extends Spawnable{
 	public function handleBreak(Item $item, Player $player){
 		$this->getBlock()->debug("Handling Break.");
 		if($this->has_record){
-			$this->getBlock()->debug("Dropping record");
 			$this->updateRecord();
 		}
 	}
 
 	public function updateRecord(Item $record = null, Player $player = null){
 		if($record == null){
+
+			//RecordStopEvent
+
+			$this->getBlock()->debug("Dropping record");
+
+			$ev = new RecordStopEvent(Main::getInstance(), $this->getBlock(), $this->record, $player);
+			$this->getBlock()->getServer()->getPluginManager()->callEvent($ev);
+			if($ev->isCancelled()){
+				$this->getBlock()->debug("Event Cancelled.");
+				return;
+			} else {
+				$this->getBlock()->debug("Event not Cancelled.");
+			}
+
 			$this->dropRecord();
 		} else {
+
+			//RecordPlayingEvent
+
 			$this->getBlock()->debug("Adding record");
+
+			$ev = new RecordPlayingEvent(Main::getInstance(), $this->getBlock(), $record, $player);
+			$this->getBlock()->getServer()->getPluginManager()->callEvent($ev);
+			if($ev->isCancelled()){
+				$this->getBlock()->debug("Event Cancelled.");
+				return;
+			} else {
+				$this->getBlock()->debug("Event not Cancelled.");
+			}
+
 			$this->record = $record;
 			$this->has_record = true;
 

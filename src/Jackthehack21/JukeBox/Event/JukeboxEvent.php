@@ -18,35 +18,17 @@
 *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-namespace Jackthehack21\JukeBox\Item;
+namespace Jackthehack21\JukeBox\Event;
 
-use pocketmine\item\Item;
+use pocketmine\event\Cancellable;
+use pocketmine\event\plugin\PluginEvent;
 
-class Record extends Item {
+use Jackthehack21\JukeBox\Main;
 
-    private $soundId;
-    private $soundName;
+abstract class JukeboxEvent extends PluginEvent implements Cancellable{
 
-	public function __construct(int $id, string $Uname, int $soundId){
-        parent::__construct($id, 0, "Record: ".$Uname);
-        $this->soundName = $Uname;
-        $this->soundId = $soundId;
+    public function __construct(Main $plugin){
+        parent::__construct($plugin);
     }
     
-	public function getMaxStackSize(): int{
-		return 1;
-    }
-
-    public function getUniqueId(): int{
-        return $this->getId();
-    }
-
-    public function getSoundName(){
-        return $this->soundName;
-    }
-
-    public function getSoundId(){
-        return $this->soundId;
-    }
-
 }
