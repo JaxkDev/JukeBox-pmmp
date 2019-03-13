@@ -54,7 +54,6 @@ class JBTile extends Spawnable{
         } else {
             if($item instanceof Record){
                 $this->updateRecord($item, $player);
-                $player->getInventory()->removeItem($item);
             }
 		}
 		$this->scheduleUpdate();
@@ -98,6 +97,8 @@ class JBTile extends Spawnable{
 			} else {
 				$this->getBlock()->debug("Event not Cancelled.");
 			}
+
+			$player->getInventory()->removeItem($record);
 
 			$this->record = $record;
 			$this->has_record = true;
