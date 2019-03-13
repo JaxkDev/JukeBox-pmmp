@@ -26,7 +26,7 @@ use pocketmine\block\Block;
 
 use Jackthehack21\JukeBox\Main;
 
-class RecordPlayingEvent extends JukeboxEvent{
+class RecordPlayEvent extends JukeboxEvent{
     
     private $plugin;
     private $player;

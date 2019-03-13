@@ -32,7 +32,7 @@ use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 
 use Jackthehack21\JukeBox\Main;
-use Jackthehack21\JukeBox\Event\RecordPlayingEvent;
+use Jackthehack21\JukeBox\Event\RecordPlayEvent;
 use Jackthehack21\JukeBox\Event\RecordStopEvent;
 
 use mt_rand;
@@ -75,7 +75,7 @@ class JBTile extends Spawnable{
 			$this->getBlock()->debug("Dropping record");
 
 			$ev = new RecordStopEvent(Main::getInstance(), $this->getBlock(), $this->record, $player);
-			$this->getBlock()->getServer()->getPluginManager()->callEvent($ev);
+			Server::getInstance()->getPluginManager()->callEvent($ev);
 			if($ev->isCancelled()){
 				$this->getBlock()->debug("Event Cancelled.");
 				return;
@@ -90,8 +90,8 @@ class JBTile extends Spawnable{
 
 			$this->getBlock()->debug("Adding record");
 
-			$ev = new RecordPlayingEvent(Main::getInstance(), $this->getBlock(), $record, $player);
-			$this->getBlock()->getServer()->getPluginManager()->callEvent($ev);
+			$ev = new RecordPlayEvent(Main::getInstance(), $this->getBlock(), $record, $player);
+			Server::getInstance()->getPluginManager()->callEvent($ev);
 			if($ev->isCancelled()){
 				$this->getBlock()->debug("Event Cancelled.");
 				return;
