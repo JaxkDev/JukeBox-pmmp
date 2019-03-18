@@ -1,4 +1,5 @@
 [![HitCount](http://hits.dwyl.io/Jackthehack21/JukeBox-pmmp.svg)]
+<a href="https://tiny.cc/JaxksDC"><img src="https://discordapp.com/api/guilds/554059221847638040/embed.png" alt="Discord server"/></a>
 
 # JukeBox-pmmp
 
@@ -15,15 +16,6 @@ _Thanks to the below for helping me testing in private, your help was massively 
 - DragonBlitz ([@DragonBlitz10](https://github.com/Dragonblitz10))
 
 - minecraft.gamepedia.com (For JukeBox icon)
-
-## Todo:
-
-- [x] JukeBox block
-- [x] Record Items
-- [x] Sound playing
-- [x] Popup "Now Playing X"
-- [X] Even more config options
-- [x] Save and Read state (when server restarts records remain in jukebox)
 
 ## Notice:
 ___This is a freelance project and will not be constantly worked on, i do accept PR's and Feature requests though.___
