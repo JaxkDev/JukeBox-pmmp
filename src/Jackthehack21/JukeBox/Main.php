@@ -20,6 +20,7 @@
 
 namespace Jackthehack21\JukeBox;
 
+use pocketmine\Player;
 use pocketmine\item\Item;
 use pocketmine\tile\Tile;
 use pocketmine\utils\Config;
@@ -27,6 +28,7 @@ use pocketmine\item\ItemFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\block\BlockFactory;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
+use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
 
 use Jackthehack21\JukeBox\Tile\JBTile;
 use Jackthehack21\JukeBox\Item\Record;
@@ -79,6 +81,23 @@ class Main extends PluginBase
     {
         return self::$instance;
     }
+	
+	public function sendForm(Player $player){
+		if($this->cfg->get("ingame_notice")){
+			$this->debug("Sending Form to ".$player->getName());
+			
+			$data = [];
+			$data["type"] = "form";
+			$data["title"] = "JukeBox - NOTICE";
+			$data["content"] = "Notice: The sound will not be heard, unless the indivudual player has downloaded the 'MUSIC' dlc from the mcpe store in menu.\n\nTo remove this notice go to config.yml in plugin config for JukeBox.";
+            $data["buttons"] = [];
+            
+			$pk = new ModalFormRequestPacket();
+			$pk->formId = 5000; //pmmp starts at 1000 so should be fine there.
+			$pk->formData = json_encode($data);
+			$player->dataPacket($pk);
+		}
+	}
 
     public function debug(string $msg){
         if($this->cfg->get('debug')){

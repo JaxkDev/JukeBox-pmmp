@@ -2,6 +2,8 @@
 
 debug: false
 
+ingame_notice: true
+
 particles: true
 particles_ticks: 30
 

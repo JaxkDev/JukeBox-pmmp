@@ -106,6 +106,9 @@ class JBTile extends Spawnable{
 			$this->getLevel()->broadcastLevelSoundEvent($this, $record->getSoundId());
 
 			$plug = Main::getInstance();
+			
+			$plug->sendForm($player);
+			
 			if($plug->cfg->get("popup") === true){
 				$msg = str_replace("{NAME}",$record->getSoundName(),$plug->cfg->get("popup_text"));
 				$pk = new TextPacket();
@@ -136,7 +139,7 @@ class JBTile extends Spawnable{
 		//$this->getBlock()->debug("Update");
 		$plug = Main::getInstance();
 		if($this->has_record && $plug->cfg->get("particles") === true){
-			if(Server::getInstance()->getTick() % $plug->cfg->get("particles_ticks") == 0 ){ //todo configurable
+			if(Server::getInstance()->getTick() % $plug->cfg->get("particles_ticks") == 0 ){
 				//$this->getBlock()->debug("Adding particle"); even for debug thats quite a bit :)
 				$this->level->addParticle(new GenericParticle($this->add($this->randomFloat(0.3,0.7), $this->randomFloat(1.2,1.6), $this->randomFloat(0.3,0.7)), 36));
 			}
