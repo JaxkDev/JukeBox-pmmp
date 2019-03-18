@@ -89,13 +89,13 @@ class Main extends PluginBase
 			$data = [];
 			$data["type"] = "form";
 			$data["title"] = "JukeBox - NOTICE";
-			$data["content"] = "Notice: The sound will not be heard, unless the indivudual player has downloaded the 'MUSIC' dlc from the mcpe store in menu.";
-			
-			$player->formIdCounter++;
+			$data["content"] = "Notice: The sound will not be heard, unless the indivudual player has downloaded the 'MUSIC' dlc from the mcpe store in menu.\n\nTo remove this notice go to config.yml in plugin config for JukeBox.";
+            $data["buttons"] = [];
+            
 			$pk = new ModalFormRequestPacket();
-			$pk->formId = $player->formIdCounter;
-			$pk->formData = $data;
-			$this->dataPacket($pk);
+			$pk->formId = 5000; //pmmp starts at 1000 so should be fine there.
+			$pk->formData = json_encode($data);
+			$player->dataPacket($pk);
 		}
 	}
 
