@@ -2,7 +2,7 @@
 
 /*
 *   JukeBox Pocketmine Plugin
-*   Copyright (C) 2019 Jackthehack21 (Jack Honour)
+*   Copyright (C) 2019 JaxkDev (Jack Honour)
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ class Main extends PluginBase
     }
 
     private function registerItems(){
-        BlockFactory::registerBlock(new JukeBox(84, "JukeBox", $this), true); //true to fix /reload
+        BlockFactory::registerBlock(new JukeBox(84, "JukeBox", $this), false); //set to false as i do not support 'reloads'
 
         //Records here:
         ItemFactory::registerItem(new Record(500, "13", LevelSoundEventPacket::SOUND_RECORD_13), true);
@@ -93,7 +93,7 @@ class Main extends PluginBase
             $data["buttons"] = [];
             
 			$pk = new ModalFormRequestPacket();
-			$pk->formId = 5000; //pmmp starts at 1000 so should be fine there.
+			$pk->formId = 1; //ID is not important here does not collide with pmmp ID system and we dont hndle response.
 			$pk->formData = json_encode($data);
 			$player->dataPacket($pk);
 		}
