@@ -57,6 +57,7 @@ class Main extends PluginBase
     private function registerItems(){
         BlockFactory::registerBlock(new JukeBox(84, "JukeBox", $this), false); //set to false as i do not support 'reloads'
 
+	
         //Records here:
         ItemFactory::registerItem(new Record(500, "13", LevelSoundEventPacket::SOUND_RECORD_13), true);
 		ItemFactory::registerItem(new Record(501, "Cat", LevelSoundEventPacket::SOUND_RECORD_CAT), true);
